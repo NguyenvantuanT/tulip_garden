@@ -8,6 +8,9 @@ class GrowthTiming {
     Duration(seconds: 40),
     Duration(seconds: 60),
   ];
+
+  static Duration get totalDuration =>
+      stageDurations.fold(Duration.zero, (total, stage) => total + stage);
 }
 
 GrowthStage growthStageAt({
