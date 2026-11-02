@@ -1,3 +1,4 @@
+import 'economy.dart';
 import 'growth.dart';
 
 class GardenPosition {
@@ -35,13 +36,18 @@ class Plot {
 }
 
 class GardenState {
-  GardenState({this.rows = 4, this.columns = 4})
+  GardenState({this.rows = 4, this.columns = 4, int coins = 0})
     : assert(rows > 0 && columns > 0),
-      _plots = List.filled(rows * columns, const Plot.empty());
+      assert(coins >= 0 && coins <= Economy.maxCoins),
+      _plots = List.filled(rows * columns, const Plot.empty()),
+      _coins = coins;
 
   final int rows;
   final int columns;
   final List<Plot> _plots;
+  int _coins;
+
+  int get coins => _coins;
 
   int get plotCount => _plots.length;
 
@@ -86,6 +92,7 @@ class GardenState {
       return PlotResult.notReady;
     }
     _plots[index] = const Plot.empty();
+    _coins = Economy.addCoins(_coins, Economy.tulipPrice);
     return PlotResult.harvested;
   }
 

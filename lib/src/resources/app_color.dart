@@ -10,4 +10,6 @@ class AppColor {
   static const Color bulb = Color(0xFFD9B98C);
   static const Color leaf = Color(0xFF6BAF4A);
   static const Color petal = Color(0xFFE5486B);
+  static const Color coin = Color(0xFFF2C14E);
+  static const Color coinEdge = Color(0xFFB8862B);
 }
