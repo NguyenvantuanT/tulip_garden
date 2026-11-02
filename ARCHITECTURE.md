@@ -24,4 +24,5 @@ Hướng import trong `src/` được `check.sh` ép (rule `layer_*`). `lib/game
 - Entry: `lib/main.dart`
 - Game: `lib/game/tulip_garden_game.dart`
 - Màu: `lib/src/resources/app_color.dart`
+- Thời gian: `lib/game/clock.dart` — chỗ duy nhất gọi `DateTime.now()`; logic nhận `Clock` truyền vào, thời lượng lớn của hoa ở `lib/game/growth.dart`
 - DI / Router: chưa có

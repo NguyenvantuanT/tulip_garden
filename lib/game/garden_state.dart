@@ -1,3 +1,5 @@
+import 'growth.dart';
+
 class GardenPosition {
   const GardenPosition(this.row, this.column);
 
@@ -16,9 +18,18 @@ class GardenPosition {
 }
 
 class Plot {
-  const Plot.empty() : isEmpty = true;
+  const Plot.empty() : plantedAt = null;
 
-  final bool isEmpty;
+  Plot.planted(DateTime plantedAt) : plantedAt = plantedAt.toUtc();
+
+  final DateTime? plantedAt;
+
+  bool get isEmpty => plantedAt == null;
+
+  GrowthStage? stageAt(DateTime now) {
+    final planted = plantedAt;
+    return planted == null ? null : growthStageAt(plantedAt: planted, now: now);
+  }
 }
 
 class GardenState {
@@ -53,4 +64,12 @@ class GardenState {
   }
 
   Plot plotAt(GardenPosition position) => _plots[indexOf(position)];
+
+  void plant(GardenPosition position, DateTime at) {
+    final index = indexOf(position);
+    if (!_plots[index].isEmpty) {
+      throw StateError('$position is already planted');
+    }
+    _plots[index] = Plot.planted(at);
+  }
 }
