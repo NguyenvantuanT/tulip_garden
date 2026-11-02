@@ -1,4 +1,5 @@
 import 'package:flame/components.dart';
+import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
 
 import '../../src/resources/app_color.dart';
@@ -7,7 +8,7 @@ import '../garden_layout.dart';
 import '../garden_state.dart';
 import 'tulip_painter.dart';
 
-class PlotComponent extends PositionComponent {
+class PlotComponent extends PositionComponent with TapCallbacks {
   PlotComponent({
     required this.garden,
     required this.gardenPosition,
@@ -31,6 +32,11 @@ class PlotComponent extends PositionComponent {
     final rect = layout.plotRect(size.toSize(), gardenPosition);
     position = Vector2(rect.left, rect.top);
     this.size = Vector2(rect.width, rect.height);
+  }
+
+  @override
+  void onTapUp(TapUpEvent event) {
+    garden.tap(gardenPosition, clock());
   }
 
   @override

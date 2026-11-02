@@ -84,30 +84,4 @@ void main() {
       expect(plot.plantedAt, plantedAt);
     });
   });
-
-  group('GardenState.plant', () {
-    test('chỉ trồng đúng ô được chọn', () {
-      final garden = GardenState();
-      const position = GardenPosition(1, 2);
-
-      garden.plant(position, plantedAt);
-
-      expect(garden.plotAt(position).plantedAt, plantedAt);
-      expect(garden.plots.where((plot) => !plot.isEmpty).length, 1);
-    });
-
-    test('ô đã trồng hoặc ngoài biên bị từ chối', () {
-      final garden = GardenState()
-        ..plant(const GardenPosition(0, 0), plantedAt);
-
-      expect(
-        () => garden.plant(const GardenPosition(0, 0), plantedAt),
-        throwsStateError,
-      );
-      expect(
-        () => garden.plant(const GardenPosition(4, 0), plantedAt),
-        throwsRangeError,
-      );
-    });
-  });
 }

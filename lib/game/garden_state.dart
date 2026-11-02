@@ -17,6 +17,8 @@ class GardenPosition {
   String toString() => 'GardenPosition($row, $column)';
 }
 
+enum PlotResult { planted, occupied, harvested, empty, notReady }
+
 class Plot {
   const Plot.empty() : plantedAt = null;
 
@@ -65,11 +67,28 @@ class GardenState {
 
   Plot plotAt(GardenPosition position) => _plots[indexOf(position)];
 
-  void plant(GardenPosition position, DateTime at) {
+  PlotResult plant(GardenPosition position, DateTime at) {
     final index = indexOf(position);
     if (!_plots[index].isEmpty) {
-      throw StateError('$position is already planted');
+      return PlotResult.occupied;
     }
     _plots[index] = Plot.planted(at);
+    return PlotResult.planted;
   }
+
+  PlotResult harvest(GardenPosition position, DateTime now) {
+    final index = indexOf(position);
+    final stage = _plots[index].stageAt(now);
+    if (stage == null) {
+      return PlotResult.empty;
+    }
+    if (stage != GrowthStage.bloom) {
+      return PlotResult.notReady;
+    }
+    _plots[index] = const Plot.empty();
+    return PlotResult.harvested;
+  }
+
+  PlotResult tap(GardenPosition position, DateTime now) =>
+      plotAt(position).isEmpty ? plant(position, now) : harvest(position, now);
 }
