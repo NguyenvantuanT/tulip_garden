@@ -15,9 +15,7 @@ class TulipGardenApp extends StatelessWidget {
     return MaterialApp(
       title: 'Tulip Garden',
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: GameWidget(game: TulipGardenGame()),
-      ),
+      home: Scaffold(body: GameWidget(game: TulipGardenGame())),
     );
   }
 }
