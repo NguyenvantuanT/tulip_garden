@@ -37,6 +37,7 @@ Agent tự kiểm chứng trên app thật: skill `flutter-run-and-verify`.
 | Nguyên tắc bất biến (golden principles) | `docs/golden-principles.md` |
 | Chất lượng từng domain/layer, gap đang theo dõi | `docs/QUALITY_SCORE.md` |
 | Nợ kỹ thuật đã biết, xung đột rule ↔ code | `docs/tech-debt-tracker.md` |
+| Task trên Kanzo, Definition of Done | `docs/task-workflow.md` |
 | Việc đang làm / đã xong | `docs/exec-plans/active/`, `docs/exec-plans/completed/` |
 | Spec sản phẩm | `docs/product-specs/` |
 
