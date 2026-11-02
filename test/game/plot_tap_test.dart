@@ -1,6 +1,8 @@
 import 'package:flame/game.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:tulip_garden/game/components/coin_hud_component.dart';
+import 'package:tulip_garden/game/economy.dart';
 import 'package:tulip_garden/game/garden_layout.dart';
 import 'package:tulip_garden/game/garden_state.dart';
 import 'package:tulip_garden/game/growth.dart';
@@ -21,6 +23,9 @@ void main() {
     final layout = GardenLayout(rows: garden.rows, columns: garden.columns);
     final center = layout.plotRect(screen, target).center;
 
+    final hud = game.descendants().whereType<CoinHudComponent>().single;
+    expect(hud.displayedText, '0');
+
     await tester.tapAt(center);
     await tester.pump(kLongPressTimeout);
     expect(garden.plotAt(target).plantedAt, now);
@@ -32,6 +37,8 @@ void main() {
     await tester.tapAt(center);
     await tester.pump(kLongPressTimeout);
     expect(garden.plotAt(target).isEmpty, isTrue);
+    expect(garden.coins, Economy.tulipPrice);
+    expect(hud.displayedText, '${Economy.tulipPrice}');
   });
 
   testWidgets('chạm vào khoảng cỏ giữa các ô thì không trồng', (tester) async {

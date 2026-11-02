@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../src/resources/app_color.dart';
 import 'clock.dart';
+import 'components/coin_hud_component.dart';
 import 'components/garden_grid_component.dart';
 import 'garden_state.dart';
 
@@ -20,5 +21,6 @@ class TulipGardenGame extends FlameGame {
   @override
   Future<void> onLoad() async {
     add(GardenGridComponent(garden: garden, clock: clock));
+    add(CoinHudComponent(garden: garden));
   }
 }
