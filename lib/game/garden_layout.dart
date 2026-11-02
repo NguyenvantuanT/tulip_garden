@@ -9,17 +9,22 @@ class GardenLayout {
     required this.columns,
     this.marginRatio = 0.08,
     this.gapRatio = 0.08,
+    this.reservedBottom = 0,
   });
 
   final int rows;
   final int columns;
   final double marginRatio;
   final double gapRatio;
+  final double reservedBottom;
 
   double pitch(Size screen) {
     final margin = screen.shortestSide * marginRatio;
     final availableWidth = math.max(0.0, screen.width - margin * 2);
-    final availableHeight = math.max(0.0, screen.height - margin * 2);
+    final availableHeight = math.max(
+      0.0,
+      screen.height - reservedBottom - margin * 2,
+    );
     return math.min(availableWidth / columns, availableHeight / rows);
   }
 
@@ -28,7 +33,10 @@ class GardenLayout {
   Rect gridRect(Size screen) {
     final cell = pitch(screen);
     return Rect.fromCenter(
-      center: screen.center(Offset.zero),
+      center: Offset(
+        screen.width / 2,
+        math.max(0.0, screen.height - reservedBottom) / 2,
+      ),
       width: cell * columns,
       height: cell * rows,
     );
