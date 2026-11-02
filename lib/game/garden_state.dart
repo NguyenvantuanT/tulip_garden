@@ -1,3 +1,5 @@
+import 'growth.dart';
+
 class GardenPosition {
   const GardenPosition(this.row, this.column);
 
@@ -15,10 +17,21 @@ class GardenPosition {
   String toString() => 'GardenPosition($row, $column)';
 }
 
-class Plot {
-  const Plot.empty() : isEmpty = true;
+enum PlotResult { planted, occupied, harvested, empty, notReady }
 
-  final bool isEmpty;
+class Plot {
+  const Plot.empty() : plantedAt = null;
+
+  Plot.planted(DateTime plantedAt) : plantedAt = plantedAt.toUtc();
+
+  final DateTime? plantedAt;
+
+  bool get isEmpty => plantedAt == null;
+
+  GrowthStage? stageAt(DateTime now) {
+    final planted = plantedAt;
+    return planted == null ? null : growthStageAt(plantedAt: planted, now: now);
+  }
 }
 
 class GardenState {
@@ -53,4 +66,29 @@ class GardenState {
   }
 
   Plot plotAt(GardenPosition position) => _plots[indexOf(position)];
+
+  PlotResult plant(GardenPosition position, DateTime at) {
+    final index = indexOf(position);
+    if (!_plots[index].isEmpty) {
+      return PlotResult.occupied;
+    }
+    _plots[index] = Plot.planted(at);
+    return PlotResult.planted;
+  }
+
+  PlotResult harvest(GardenPosition position, DateTime now) {
+    final index = indexOf(position);
+    final stage = _plots[index].stageAt(now);
+    if (stage == null) {
+      return PlotResult.empty;
+    }
+    if (stage != GrowthStage.bloom) {
+      return PlotResult.notReady;
+    }
+    _plots[index] = const Plot.empty();
+    return PlotResult.harvested;
+  }
+
+  PlotResult tap(GardenPosition position, DateTime now) =>
+      plotAt(position).isEmpty ? plant(position, now) : harvest(position, now);
 }
