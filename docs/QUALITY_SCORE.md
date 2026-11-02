@@ -4,6 +4,6 @@ Chấm theo domain × layer, `harness-gardening` cập nhật. Thang: A (sạch,
 
 | Domain | Game | Models | Services | Tests | Ghi chú |
 |---|---|---|---|---|---|
-| Garden | C | — | — | B | Mới là khung; color literal (TD-1); 1 widget test |
+| Garden | B | — | — | B | Mới là khung, chưa có logic game; 1 widget test |
 
 Cập nhật lần cuối: 2026-11-02

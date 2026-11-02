@@ -7,6 +7,7 @@ Bản đồ cấp cao. Mọi đường dẫn trong backtick được `docs-check
 ```
 main.dart                Flutter shell: MaterialApp + GameWidget
 game/                    FlameGame + component (ruộng, hoa, UI trong game)
+src/resources/           AppColor — token màu, dùng cho cả game lẫn widget
 src/ (khi cần)           pages/ components/ services/ models/ theo bộ base — menu, cửa hàng, lưu game
 ```
 
@@ -22,4 +23,5 @@ Hướng import trong `src/` được `check.sh` ép (rule `layer_*`). `lib/game
 
 - Entry: `lib/main.dart`
 - Game: `lib/game/tulip_garden_game.dart`
+- Màu: `lib/src/resources/app_color.dart`
 - DI / Router: chưa có

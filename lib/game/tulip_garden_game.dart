@@ -2,9 +2,11 @@ import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
+import '../src/resources/app_color.dart';
+
 class TulipGardenGame extends FlameGame {
   @override
-  Color backgroundColor() => const Color(0xFFB8E0A0);
+  Color backgroundColor() => AppColor.gardenGrass;
 
   @override
   Future<void> onLoad() async {
@@ -17,7 +19,7 @@ class TulipGardenGame extends FlameGame {
           style: const TextStyle(
             fontSize: 32,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF3B5E2B),
+            color: AppColor.leafDark,
           ),
         ),
       ),
