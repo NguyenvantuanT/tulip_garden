@@ -27,7 +27,10 @@ void main() {
           expect(grid.top, greaterThanOrEqualTo(0));
           expect(grid.right, lessThanOrEqualTo(screen.width));
           expect(grid.bottom, lessThanOrEqualTo(screen.height));
-          expect(grid.shortestSide, closeTo(screen.shortestSide - margin * 2, 0.001));
+          expect(
+            grid.shortestSide,
+            closeTo(screen.shortestSide - margin * 2, 0.001),
+          );
         });
 
         test('mọi ô là hình vuông và không chồng lên nhau', () {

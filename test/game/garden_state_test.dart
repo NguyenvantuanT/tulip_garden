@@ -52,7 +52,10 @@ void main() {
     test('danh sách ô không sửa được từ bên ngoài', () {
       final garden = GardenState();
 
-      expect(() => garden.plots.add(const Plot.empty()), throwsUnsupportedError);
+      expect(
+        () => garden.plots.add(const Plot.empty()),
+        throwsUnsupportedError,
+      );
     });
   });
 }
